@@ -1,0 +1,1 @@
+Funkční verze pro esp32
