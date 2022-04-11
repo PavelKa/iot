@@ -1,2 +1,8 @@
 **/build/*
 pulse-counter/main/secrets.h
+pulse-counter/main/certs/client.crt
+pulse-counter/main/certs/client.key
+**/client.key
+**/client.crt
+ssl_mutual_auth/sdkconfig
+ssl_mutual_auth/sdkconfig.old

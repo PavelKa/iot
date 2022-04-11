@@ -5,9 +5,37 @@
       },
       {
         "path": "./pulse-simulator"
+      },
+      {
+        "path": "aws-pulse-counter"
+      },
+      {
+        "path": "components/pka_aws"
+      },
+      {
+        "path": "components/pka_wifi"
+      },
+      {
+        "path": "components/pka_ntp"
       }
     ],
     "settings": {
-      "idf.espIdfPath": "${env:HOME}/esp/esp-idf"
+      "idf.espIdfPath": "${env:HOME}/esp/esp-idf",
+      "files.associations": {
+        "task.h": "c",
+        "config.h": "c",
+        "pcnt.h": "c",
+        "esp_attr.h": "c",
+        "esp_log.h": "c",
+        "esp_netif.h": "c",
+        "dns.h": "c",
+        "mqtt_client.h": "c",
+        "netdb.h": "c",
+        "*.inc": "c",
+        "component1.h": "c",
+        "component2.h": "c",
+        "queue.h": "c",
+        "freertos.h": "c"
+      }
     }
   }
