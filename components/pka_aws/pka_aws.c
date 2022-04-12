@@ -71,8 +71,8 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
     //        msg_id =  esp_mqtt_client_subscribe(client, "mojevec/sub", 0);
     //        ESP_LOGI(TAG, "sent subscribe successful, msg_id=%d", msg_id);
 
-    //        msg_id = esp_mqtt_client_subscribe(client, "mojevec/elektrika", 1);
-    //        ESP_LOGI(TAG, "sent subscribe successful, msg_id=%d", msg_id);
+//            msg_id = esp_mqtt_client_subscribe(client, "mojevec/elektrika", 1);
+            //ESP_LOGI(TAG, "sent subscribe successful, msg_id=%d", msg_id);
 
     //        msg_id = esp_mqtt_client_unsubscribe(client, "/mojevec/elektrika");
     //        ESP_LOGI(TAG, "sent unsubscribe successful, msg_id=%d", msg_id);
@@ -83,8 +83,8 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
 
   case MQTT_EVENT_SUBSCRIBED:
     ESP_LOGI(TAG, "MQTT_EVENT_SUBSCRIBED, msg_id=%d", event->msg_id);
-    msg_id = esp_mqtt_client_publish(client, "mojevec/elektrika", "data", 0, 0, 0);
-    ESP_LOGI(TAG, "sent publish successful, msg_id=%d", msg_id);
+  // msg_id = esp_mqtt_client_publish(client, "mojevec/elektrika", "data", 0, 0, 0);
+    //ESP_LOGI(TAG, "sent publish successful, msg_id=%d", msg_id);
     break;
   case MQTT_EVENT_UNSUBSCRIBED:
     ESP_LOGI(TAG, "MQTT_EVENT_UNSUBSCRIBED, msg_id=%d", event->msg_id);
@@ -125,8 +125,8 @@ static void mqtt_app_start(void)
   ESP_LOGI(TAG, "[APP] Free memory: %d bytes", esp_get_free_heap_size());
   client = esp_mqtt_client_init(&mqtt_cfg);
   /* The last argument may be used to pass data to the event handler, in this example mqtt_event_handler */
-  ESP_LOGI(TAG, "esp_mqtt_client_register_event");
-  esp_mqtt_client_register_event(client, ESP_EVENT_ANY_ID, mqtt_event_handler, NULL);
+  //ESP_LOGI(TAG, "esp_mqtt_client_register_event");
+  //esp_mqtt_client_register_event(client, ESP_EVENT_ANY_ID, mqtt_event_handler, NULL);
   ESP_LOGI(TAG, "esp_mqtt_client_start(client);");
   esp_mqtt_client_start(client);
 }

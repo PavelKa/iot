@@ -36,13 +36,13 @@ typedef struct
  *  - set up the input filter
  *  - set up the counter events to watch
  */
-static void pcnt_example_init(int unit, int pcntChannel, int gpio)
+static void pcnt_example_init(int unit, int pcntChannel, int gpio, int ctlGpio)
 {
   /* Prepare configuration for the PCNT unit */
   pcnt_config_t pcnt_config = {
       // Set PCNT input signal and control GPIOs
       .pulse_gpio_num = gpio,
-      .ctrl_gpio_num = 5,
+      .ctrl_gpio_num = ctlGpio,
       .channel = pcntChannel,
       .unit = unit,
       // What to do on the positive / negative edge of pulse input?
@@ -128,9 +128,9 @@ void app_main(void)
   pka_initialize_sntp();
   checkNTPUpdated();
 
-  pcnt_example_init(PCNT_UNIT_0, PCNT_CHANNEL_0, 4);
-  pcnt_example_init(PCNT_UNIT_1, PCNT_CHANNEL_0, 16);
-  pcnt_example_init(PCNT_UNIT_2, PCNT_CHANNEL_0, 17);
+  pcnt_example_init(PCNT_UNIT_0, PCNT_CHANNEL_0, 16,0);
+  pcnt_example_init(PCNT_UNIT_1, PCNT_CHANNEL_0, 17,2);
+  pcnt_example_init(PCNT_UNIT_2, PCNT_CHANNEL_0, 18,4);
   int16_t countL1 = 0;
   int16_t countL2 = 0;
   int16_t countL3 = 0;

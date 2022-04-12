@@ -8,7 +8,7 @@
         "interface/ftdi/esp32_devkitj_v1.cfg",
         "target/esp32.cfg"
     ],
-    "idf.port": "/dev/ttyUSB1",
+    "idf.port": "/dev/ttyUSB0",
     "idf.pythonBinPath": "/home/pavel/.espressif/python_env/idf4.4_py3.10_env/bin/python",
     "idf.toolsPath": "/home/pavel/.espressif",
     "idf.flashType": "UART"
