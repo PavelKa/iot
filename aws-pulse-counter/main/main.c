@@ -134,7 +134,7 @@ void app_main(void)
   int16_t countL1 = 0;
   int16_t countL2 = 0;
   int16_t countL3 = 0;
-
+  esp_log_level_set("*", ESP_LOG_NONE);
   while (/* condition */ 1)
   {
     /* code */
@@ -158,6 +158,7 @@ void app_main(void)
     cJSON_AddNumberToObject(root, "l3S0Count", countL3);
     cJSON_AddNumberToObject(root, "tarif", gpio_get_level(5));
 
+
     time_t now;
     struct tm timeinfo;
 
@@ -165,12 +166,14 @@ void app_main(void)
     localtime_r(&now, &timeinfo);
     int myNow = now;
 
-    char buffer[100];
+/*    char buffer[100];
     strftime(buffer, sizeof(buffer), "%FT%T%z", &timeinfo);
     cJSON_AddStringToObject(root, "timestamp", buffer);
     cJSON_AddNumberToObject(root, "dayOfWeek", timeinfo.tm_wday);
-    cJSON_AddNumberToObject(root, "month", timeinfo.tm_mon);
+    cJSON_AddNumberToObject(root, "month", timeinfo.tm_mon);*/
     cJSON_AddNumberToObject(root, "now", myNow);
+    /*
+    cJSON_AddNumberToObject(root, "freeHeap", esp_get_free_heap_size() );
     
     int y = 0, w = 0;
     int err = tm_YearWeek(&timeinfo, &y, &w);
@@ -183,11 +186,13 @@ void app_main(void)
 
     cJSON_AddNumberToObject(root, "weekOfYear", ww);
     cJSON_AddNumberToObject(root, "year", y);
-
+*/
     char *my_json_string = cJSON_Print(root);
     ESP_LOGI(TAG, "my_json_string\n%s", my_json_string);
     cJSON_Delete(root);
+    ESP_LOGI(TAG, "free my_json_string");
     pka_aws_publish("mojevec/elektrika", my_json_string);
+    free(my_json_string);
   }
 
   
