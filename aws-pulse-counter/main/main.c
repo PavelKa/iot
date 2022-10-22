@@ -113,6 +113,7 @@ void app_main(void)
   ESP_LOGI(TAG, "[APP] Startup..");
   ESP_LOGI(TAG, "[APP] Free memory: %d bytes", esp_get_free_heap_size());
   ESP_LOGI(TAG, "[APP] IDF version: %s", esp_get_idf_version());
+  esp_log_level_set("*", ESP_LOG_ERROR); 
 
   // Initialize NVS
   esp_err_t ret = nvs_flash_init();
@@ -134,7 +135,7 @@ void app_main(void)
   int16_t countL1 = 0;
   int16_t countL2 = 0;
   int16_t countL3 = 0;
-  esp_log_level_set("*", ESP_LOG_NONE);
+  int16_t mins = 0;
   while (/* condition */ 1)
   {
     /* code */
@@ -190,9 +191,20 @@ void app_main(void)
     char *my_json_string = cJSON_Print(root);
     ESP_LOGI(TAG, "my_json_string\n%s", my_json_string);
     cJSON_Delete(root);
+    
+    int messageId = pka_aws_publish("mojevec/elektrika", my_json_string);
+   
+    if(messageId <= 0){
+      ESP_LOGE(TAG, "Message not published.Restarting...");
+      	 esp_restart();    
+        } else {
+      ESP_LOGE(TAG, "Message  published: %i", messageId);
+    }
     ESP_LOGI(TAG, "free my_json_string");
-    pka_aws_publish("mojevec/elektrika", my_json_string);
     free(my_json_string);
+    if(mins++ > 600) {
+      esp_restart(); 
+    }
   }
 
   

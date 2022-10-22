@@ -63,7 +63,7 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
   ESP_LOGD(TAG, "Event dispatched from event loop base=%s, event_id=%d", base, event_id);
   esp_mqtt_event_handle_t event = event_data;
   esp_mqtt_client_handle_t client = event->client;
-  int msg_id;
+//  int msg_id;
   switch ((esp_mqtt_event_id_t)event_id)
   {
   case MQTT_EVENT_CONNECTED:
@@ -135,17 +135,15 @@ void pka_aws_init(void)
 {
   ESP_LOGI(TAG, "Initializing aws");
 
-  esp_log_level_set("*", ESP_LOG_INFO);
-  esp_log_level_set("MQTT_CLIENT", ESP_LOG_VERBOSE);
-  esp_log_level_set("TRANSPORT_BASE", ESP_LOG_VERBOSE);
-  esp_log_level_set("TRANSPORT", ESP_LOG_VERBOSE);
-  esp_log_level_set("OUTBOX", ESP_LOG_VERBOSE);
-
-  mqtt_app_start();
+   mqtt_app_start();
 
   
 }
 
 int pka_aws_publish(const char *topic, const char *data){
-  return esp_mqtt_client_publish(client, topic, data, 0, 0, 0);
+   ESP_LOGI(TAG, "before publish");
+  int x = esp_mqtt_client_publish(client, topic, data, 0, 0, 0);
+   ESP_LOGI(TAG, "after publish");
+ 
+  return x;
 }

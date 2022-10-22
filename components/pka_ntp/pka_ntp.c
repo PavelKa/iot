@@ -32,7 +32,8 @@ void checkNTPUpdated(void)
         time(&now);
         localtime_r(&now, &timeinfo);
     }
-    static char buffer[100];
-    strftime(buffer, sizeof(buffer), "%FT%T%z", &timeinfo);
-    return buffer;
+     printf("Time set...\n");
+
+  
+   
 }
